@@ -61,6 +61,16 @@ void aKeyAction();
 void sKeyAction();
 void dKeyAction();
 
+
+bool isOrtho = true;					// is othero view?
+
+float tX=0 , tZ = 0,  tSpeed = 1.0;				// translate for the model view
+float ptx = 0, pty = 0, ptSpeed= 1.0;					//translate for the projection
+float pRy = 0.0, prSpeed = 0.1;					// rotation speed for the projection
+float oNear = -10.0, oFar = 10.0;     //ortho near n far
+float pNear = 1.0, pFar = 21.0;     //perspective near n far
+float s1Rad = 3.0;
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------switch case placing
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
