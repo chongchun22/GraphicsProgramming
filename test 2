@@ -130,6 +130,46 @@ void dKeyAction() {
 	bodyAngle = 270.0f;
 }
 
+void drawSphere(float r) {
+	GLUquadricObj* sphere = NULL;	//declare quadric obj pointer
+	sphere = gluNewQuadric();		//create quadric obj in the memory
+
+	//gluQuadricDrawStyle(sphere, GLU_LINE);	//draws outline on the sphere
+
+	gluSphere(sphere, r, 30, 15);	//draw sphere
+	gluDeleteQuadric(sphere);	//destroy the sphere
+}
+
+void projection() {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	if (isOrtho) {
+		glOrtho(-10, 10, -9.0, 9.0, oNear, oFar);	//Ortho view, default viewing volume
+	}
+	else {
+		gluPerspective(21, 1.0, -1.0, 3.0);
+		glFrustum(-16.0, 16.0, -9.0, 9.0, pNear, pFar); // 
+	}
+}
+
+void display()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+
+	projection();
+
+	glMatrixMode(GL_MODELVIEW);		//refer to the modelview matrix
+	glLoadIdentity();				//reset the modelview matrix
+	glTranslatef(ptx, pty, tZ);
+	glRotatef(pRy, 0.0, 1.0, 0.0);
+
+	drawSphere(5.0);
+}
+//--------------------------------------------------------------------
+
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Void End 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 {
